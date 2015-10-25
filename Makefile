@@ -1,6 +1,6 @@
-all: tex pdf
+all: clean tex pdf
 
-pdf: clean
+pdf: 
 	pdflatex handd_book.tex
 	pdflatex handd_book.tex
 	pdflatex handd_book.tex
