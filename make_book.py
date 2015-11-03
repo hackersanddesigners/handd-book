@@ -5,12 +5,11 @@ import os
 from bs4 import BeautifulSoup
 
 pages = [
-  'Royal_Tombs._Review._Hackers_%26_Designers_Summer_Academy'
-  #'Toy_Hacking'
-  #'Algorthimic_recipe_1'
-  #'The_right_to_die_digitally,_digital_euthanasia,_image_rights_and_more'
-  #'Toy_Hacking',
-  #'Algorithmic_Kitchen',
+  'Royal_Tombs._Review._Hackers_%26_Designers_Summer_Academy',
+  'Toy_Hacking',
+  'Algorthimic_recipe_1',
+  'The_right_to_die_digitally,_digital_euthanasia,_image_rights_and_more'
+  #'Algorithmic_Kitchen'
   #'Code,_text_and_text-to-speech',
   #'Language_Design',
   #'Applied_Bio-Robotics',

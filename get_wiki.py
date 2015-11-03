@@ -2,10 +2,10 @@ import json
 import urllib2
 f = open('test.wiki', 'w')  
 pages = [
-  'Algorthimic_recipe_1'
-  #'The_right_to_die_digitally,_digital_euthanasia,_image_rights_and_more'
-  #'Toy_Hacking',
-  #'Algorithmic_Kitchen',
+  'Algorthimic_recipe_1',
+  'The_right_to_die_digitally,_digital_euthanasia,_image_rights_and_more',
+  'Toy_Hacking',
+  'Algorithmic_Kitchen'
   #'Code,_text_and_text-to-speech',
   #'Language_Design',
   #'Applied_Bio-Robotics',
