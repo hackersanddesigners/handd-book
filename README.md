@@ -3,7 +3,7 @@ Method 1
 
 Step 1:
 ```
-python ./get_wiki.py 
+python get_wiki.py 
 ```
 
 Step 2:
