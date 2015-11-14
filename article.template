@@ -1,9 +1,17 @@
 \documentclass[titlepage,$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+
+% Trying to make outlined fonts - JBG
+\usepackage[outline]{contour}
+
+% Makes fancy headers - JBG
+\usepackage{fancyhdr}
+
 $if(fontfamily)$
 \usepackage[$fontfamilyoptions$]{$fontfamily$}
 $else$
 \usepackage{lmodern}
 $endif$
+
 $if(linestretch)$
 \usepackage{setspace}
 \setstretch{$linestretch$}
@@ -156,8 +164,15 @@ $if(dir)$
 \fi
 $endif$
 
+% Added this to make the the titles BIG - JBG
+\font\testhuge="Helvetica" at 75pt
+
 $if(title)$
-\title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}
+% Added MakeUppercase to force uppercase titles - JBG
+%\title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}
+%\title{\textcolor{white}{\contour{black}{\MakeUppercase{$title$}}}$if(subtitle)$\\\vspace{0.5em}{\testhuge \MakeUppercase{$subtitle$}}$endif$}
+\title{\MakeUppercase{$title$}$if(subtitle)$\\\vspace{0.5em}{\testhuge \MakeUppercase{$subtitle$}}$endif$}
+
 $endif$
 $if(author)$
 \author{$for(author)$$author$$sep$ \and $endfor$}
@@ -179,6 +194,15 @@ $else$
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 $endif$
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\sffamily\colorbox{black}{\bfseries\textcolor{white}{\tiny \rightmark}}}
+\fancyhead[RE,LO]{\sffamily\colorbox{black}{\bfseries\textcolor{white}{\tiny Hackers \& Designers Summer Academy 2015 documentation}}}
+
+%\lhead{\sffamily\colorbox{black}{\bfseries\textcolor{white}{\tiny \rightmark}}}
+%\chead{\sffamily\colorbox{black}{\bfseries\textcolor{white}{}}}
+%\rhead{\sffamily\colorbox{black}{\bfseries\textcolor{white}{\tiny Hackers \& Designers Summer Academy 2015 documentation}}}
 
 \begin{document}
 $if(title)$
@@ -208,6 +232,7 @@ $if(lof)$
 \listoffigures
 $endif$
 \newpage
+
 $body$
 
 $if(natbib)$
