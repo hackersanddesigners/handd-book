@@ -6,6 +6,10 @@
 % Makes fancy headers - JBG
 \usepackage{fancyhdr}
 
+% Define section header sizes - JBG
+\usepackage{titlesec}
+\usepackage{titling}
+
 $if(fontfamily)$
 \usepackage[$fontfamilyoptions$]{$fontfamily$}
 $else$
@@ -122,7 +126,7 @@ $if(graphics)$
 % Scale images if necessary, so that they will not overflow the page
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setkeys{Gin}{width=\maxwidth,height=0.8\maxheight,keepaspectratio}
 $endif$
 $if(links-as-notes)$
 % Make links footnotes instead of hotlinks:
@@ -164,16 +168,20 @@ $if(dir)$
 \fi
 $endif$
 
-% Added this to make the the titles BIG - JBG
-\font\testhuge="Helvetica" at 75pt
+% Added this to make the titles BIG - JBG
+\font\hdhuge="Helvetica" at 75pt
+
+% Section header stuff - JBG
+
+\newcommand{\sectionbreak}{\clearpage}
+\newfontfamily\headingfont[]{Helvetica}
+\titleformat{\section}[display]
+  {\hdhuge}{\sectiontitlename\ \thesection}{0pt}{\raggedright}
 
 $if(title)$
-% Added MakeUppercase to force uppercase titles - JBG
-%\title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}
-%\title{\textcolor{white}{\contour{black}{\MakeUppercase{$title$}}}$if(subtitle)$\\\vspace{0.5em}{\testhuge \MakeUppercase{$subtitle$}}$endif$}
-\title{\MakeUppercase{$title$}$if(subtitle)$\\\vspace{0.5em}{\testhuge \MakeUppercase{$subtitle$}}$endif$}
-
+\title{\MakeUppercase{$title$}$if(subtitle)$\\\vspace{0.5em}{\hdhuge \MakeUppercase{$subtitle$}}$endif$}
 $endif$
+
 $if(author)$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 $endif$
@@ -197,12 +205,11 @@ $endif$
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE,RO]{\sffamily\colorbox{black}{\bfseries\textcolor{white}{\tiny \rightmark}}}
-\fancyhead[RE,LO]{\sffamily\colorbox{black}{\bfseries\textcolor{white}{\tiny Hackers \& Designers Summer Academy 2015 documentation}}}
-
-%\lhead{\sffamily\colorbox{black}{\bfseries\textcolor{white}{\tiny \rightmark}}}
-%\chead{\sffamily\colorbox{black}{\bfseries\textcolor{white}{}}}
-%\rhead{\sffamily\colorbox{black}{\bfseries\textcolor{white}{\tiny Hackers \& Designers Summer Academy 2015 documentation}}}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[LE,RO]{\sffamily\colorbox{black}{\bfseries\textcolor{white}{\tiny \leftmark}}}
+\fancyhead[RE,LO]{\sffamily\colorbox{black}{\bfseries\textcolor{white}{\tiny HDSA2015}}}
+\fancyfoot{}
+\fancyfoot[C]{\sffamily\colorbox{black}{\bfseries\textcolor{white}{\tiny PAGE \thepage}}}
 
 \begin{document}
 $if(title)$

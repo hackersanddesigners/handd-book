@@ -11,7 +11,7 @@ pages = [
   'How_to_research_stuff_by_making',
   'Royal_Tombs._Review._Hackers_%26_Designers_Summer_Academy',
   '(Un)willingly_Memorialized_—_Images_and_the_dead_in_the_Digital_Age',
-  'Summer_Talks:_Training_and_the_problem_of_data:_What_would_it_take_to_adopt_fugitive_statistics',
+  'Summer_Talks:_Training_and_the_problem_of_data',
   'Summer_Talks:_Gestural_Interfacing',
   'Summer_Talks:_Discrete_Cosine_Transform',
   'Review_Jona_Andersen',
@@ -43,12 +43,12 @@ pages = [
   'DIY_steps_Talking_plant',
   'DIY_steps_bio-robotics',
   'Group_pictures',
-  'Images_test_page',
-  'Jeremy_Bailey_ad1',
-  'Jeremy_Bailey_ad2',
-  'Jeremy_Bailey_ad3',
-  'Jeremy_Bailey_ad4',
-  'Jeremy_Bailey_ad5',
+  #'Images_test_page',
+  #'Jeremy_Bailey_ad1',
+  #'Jeremy_Bailey_ad2',
+  #'Jeremy_Bailey_ad3',
+  #'Jeremy_Bailey_ad4',
+  #'Jeremy_Bailey_ad5',
   'Feedback_deelnemers',
   'Toy_Hacking',
   'Algorithmic_Kitchen',
@@ -67,7 +67,6 @@ pages = [
 ]
 
 def get_image(filename):
-  print filename
   # http://wiki.hackersanddesigners.nl/mediawiki/api.php?action=query&titles=File:Chicken-and-Potato-Soup.png&prop=imageinfo&&iiprop=url&format=json
   if os.path.exists(filename):
     return
@@ -88,12 +87,20 @@ def get_image(filename):
 
 for page in pages:
   wikiJson = json.load(urllib2.urlopen('http://wiki.hackersanddesigners.nl/mediawiki/api.php?action=parse&page=' + page + '&format=json&disableeditsection=true&prop=wikitext|images'))
+  wikistr = ''
+  try:
+    title = wikiJson['parse']['title'].encode('utf-8').strip()
+    print title
+    wikistr += '\n\n=' + title + '=\n\n'
+  except Exception, e:
+    print e
 
   try:
     # Get images - JBG
     imgs = wikiJson['parse']['images']
     for img in imgs:
       img = img.encode('utf-8').strip()
+      print ' - ' + img
       get_image(img)
   except Exception, e:
     print e
@@ -102,9 +109,8 @@ for page in pages:
   #title = title.replace('&', '\&')
 
   try:
-    str = '=' + wikiJson['parse']['title'].encode('utf-8').strip() + '=\n\n'
-    str += wikiJson['parse']['wikitext']['*'].encode('utf-8').strip()
-    f.write(str)
+    wikistr += wikiJson['parse']['wikitext']['*'].encode('utf-8').strip()
+    f.write(wikistr)
   except Exception, e:
     print e
 
