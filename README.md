@@ -1,5 +1,10 @@
-Method 1
-========
+H&D "BOOK" GENERATOR
+====================
+
+Scripts that generate a PDF fed from our wiki at: http://wiki.hackersanddesigners.nl
+
+STEPS TO GENERATE PDF
+---------------------
 
 Step 1:
 ```
