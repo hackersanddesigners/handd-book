@@ -3,7 +3,7 @@ import json
 import urllib2
 import os
 
-f = open('test.wiki', 'w')  
+f = open('handd-book.wiki', 'w')  
 pages = [
   'How_to_organize_a_summer_academy',
   'How_to_document_a_summer_academy',
