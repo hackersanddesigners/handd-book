@@ -178,10 +178,12 @@ $endif$
 
 \newcommand{\sectionbreak}{\clearpage}
 \titleformat{\section}[display]
-  {\fontsize{75}{75}\selectfont}{\sectiontitlename\ \thesection}{0pt}{\raggedright}
+  {\fontsize{70}{55}\selectfont}{\sectiontitlename\ \thesection}{0pt}{\raggedright\sloppy}
 
 $if(title)$
-\title{\fontsize{75}{75}\selectfont\MakeUppercase{$title$}$if(subtitle)$\\\vspace{0.5em}{\MakeUppercase{$subtitle$}}$endif$}
+\setlength{\droptitle}{-10em} 
+\title{\fontsize{70}{55}\selectfont\MakeUppercase{$title$}$if(subtitle)$\\\vspace{0.5em}{\MakeUppercase{$subtitle$}}$endif$}
+\posttitle{\par\end{center}}
 $endif$
 
 $if(author)$
@@ -216,6 +218,7 @@ $endif$
 \begin{document}
 $if(title)$
 \maketitle
+\clearpage
 $endif$
 $if(abstract)$
 \begin{abstract}
