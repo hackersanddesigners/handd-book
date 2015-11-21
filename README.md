@@ -15,5 +15,5 @@ python get_wiki.py
 
 Step 2:
 ```
-pandoc --template handd-book.template handd-book.wiki -o handd-book.pdf --toc -M fontsize=12pt -M title='Hackers \& Designers' -M subtitle='About Bugs, Bots and Bytes' --latex-engine xelatex -M mainfont='Helvetica' -M papersize='a4paper'
+pandoc --template handd-book.template handd-book.wiki -o handd-book.pdf --toc -M fontsize=12pt -M author='Hackers \& Designers' -M title='About Bugs, Bots and Bytes' --latex-engine xelatex -M mainfont='Helvetica' -M papersize='a4paper' -V links-as-notes
 ```

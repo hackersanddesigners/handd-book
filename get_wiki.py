@@ -2,6 +2,9 @@
 import json
 import urllib2
 import os
+import re
+
+wikiUrl = 'http://wiki.hackersanddesigners.nl/mediawiki/'
 
 f = open('handd-book.wiki', 'w')  
 pages = [
@@ -10,7 +13,7 @@ pages = [
   'How_to_engage_in_collaborative_processes',
   'How_to_research_stuff_by_making',
   'Royal_Tombs._Review._Hackers_%26_Designers_Summer_Academy',
-  '(Un)willingly_Memorialized_—_Images_and_the_dead_in_the_Digital_Age',
+  '(Un)willingly_Memorialized',
   'Summer_Talks:_Training_and_the_problem_of_data',
   'Summer_Talks:_Gestural_Interfacing',
   'Summer_Talks:_Discrete_Cosine_Transform',
@@ -70,7 +73,7 @@ def get_image(filename):
   # http://wiki.hackersanddesigners.nl/mediawiki/api.php?action=query&titles=File:Chicken-and-Potato-Soup.png&prop=imageinfo&&iiprop=url&format=json
   if os.path.exists(filename):
     return
-  wikiJson = json.load(urllib2.urlopen('http://wiki.hackersanddesigners.nl/mediawiki/api.php?action=query&titles=File:' + filename + '&prop=imageinfo&&iiprop=url&format=json'))
+  wikiJson = json.load(urllib2.urlopen(wikiUrl + 'api.php?action=query&titles=File:' + filename + '&prop=imageinfo&&iiprop=url&format=json'))
   print wikiJson
   try:
     pages = wikiJson['query']['pages']
@@ -86,7 +89,9 @@ def get_image(filename):
     print e
 
 for page in pages:
-  wikiJson = json.load(urllib2.urlopen('http://wiki.hackersanddesigners.nl/mediawiki/api.php?action=parse&page=' + page + '&format=json&disableeditsection=true&prop=wikitext|images'))
+  pageUrl = wikiUrl + 'api.php?action=parse&page=' + page + '&format=json&disableeditsection=true&prop=wikitext|images|links' 
+  print pageUrl 
+  wikiJson = json.load(urllib2.urlopen(pageUrl))
   wikistr = ''
   try:
     title = wikiJson['parse']['title'].encode('utf-8').strip()
@@ -105,11 +110,17 @@ for page in pages:
   except Exception, e:
     print e
 
-  #title = wikiJson['parse']['title'].encode('utf-8').strip()
-  #title = title.replace('&', '\&')
-
   try:
     wikistr += wikiJson['parse']['wikitext']['*'].encode('utf-8').strip()
+    wikistr = re.sub(r'\|\d*(x\d*)?px', '', wikistr) # Remove px info from images - JBG
+    wikistr = re.sub(r'{{[A-Za-z0-9#:|/.?= \n&\-\\\”\{\}]*}}', '', wikistr) # Remove youtube links - JBG
+
+    # Replace internal wiki links with external links for footnotes - JBG
+    for link in wikiJson['parse']['links']:
+      link_str = link['*'].encode('utf-8').strip()
+      prep_str = link_str.replace(' ', '_')
+      wikistr = re.sub(r'\[\[' + link_str + '[A-Za-z0-9\(\)| ]*\]\]', '[' + wikiUrl + 'index.php/' + prep_str + ' ' + link_str + ']', wikistr) 
+
     f.write(wikistr)
   except Exception, e:
     print e

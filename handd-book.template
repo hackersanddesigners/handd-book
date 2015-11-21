@@ -170,6 +170,10 @@ $if(dir)$
 \fi
 $endif$
 
+% Footnotes - JBG
+
+\setlength{\skip\footins}{2cm}
+
 % Section header stuff - JBG
 
 \newcommand{\sectionbreak}{\clearpage}
@@ -177,11 +181,11 @@ $endif$
   {\fontsize{75}{75}\selectfont}{\sectiontitlename\ \thesection}{0pt}{\raggedright}
 
 $if(title)$
-\title{\MakeUppercase{$title$}$if(subtitle)$\\\vspace{0.5em}{\fontsize{75}{75}\selectfont\MakeUppercase{$subtitle$}}$endif$}
+\title{\fontsize{75}{75}\selectfont\MakeUppercase{$title$}$if(subtitle)$\\\vspace{0.5em}{\MakeUppercase{$subtitle$}}$endif$}
 $endif$
 
 $if(author)$
-\author{$for(author)$$author$$sep$ \and $endfor$}
+\author{$for(author)$\MakeUppercase{$author$}$sep$ \and $endfor$}
 $endif$
 \date{$date$}
 $for(header-includes)$
