@@ -181,7 +181,7 @@ $endif$
   {\fontsize{70}{55}\selectfont}{\sectiontitlename\ \thesection}{0pt}{\raggedright\sloppy}
 
 $if(title)$
-\setlength{\droptitle}{-10em} 
+\setlength{\droptitle}{-15em} 
 \title{\fontsize{70}{55}\selectfont\MakeUppercase{$title$}$if(subtitle)$\\\vspace{0.5em}{\MakeUppercase{$subtitle$}}$endif$}
 \posttitle{\par\end{center}}
 $endif$
