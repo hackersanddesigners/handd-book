@@ -3,7 +3,7 @@ H&D "BOOK" GENERATOR
 
 Scripts that generate a PDF fed from our wiki at: http://wiki.hackersanddesigners.nl
 
-Requires python, pandoc, latex, etc.. Basically keep installing dependencies until it works. Ask Google if you have issues.
+Requires python, pandoc, latex, etc.. Basically keep installing dependencies until it works. Ask Google if you have issues.  OS X users should consider downloading MacTeX as opposed to BasicTeX, because you may be missing some important items that are a bit of a headache later.
 
 STEPS TO GENERATE PDF
 ---------------------
