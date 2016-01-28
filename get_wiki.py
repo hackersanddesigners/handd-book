@@ -43,7 +43,10 @@ def get_image(filename):
   except Exception, e:
     print e
 
-pages = get_pages('Book_sprint_2015')
+pages = get_pages(
+    'Terminal',
+    
+  )
 
 for page in pages:
   pageUrl = wikiUrl + 'api.php?action=parse&page=' + page + '&format=json&disableeditsection=true&prop=wikitext|images|links' 
